@@ -1,5 +1,5 @@
 # Session-3.5
-Which products contribute the most to carbon emissions?
+**Which products contribute the most to carbon emissions?**
 ```
 SELECT product_name, SUM(carbon_footprint_pcf)
 FROM product_emissions
@@ -19,7 +19,8 @@ LIMIT 10
 | Electric Motor                                                                                                                     | 160655                    | 
 | Audi A6                                                                                                                            | 111282                    | 
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | 100621                    | 
-What are the industry groups of these products?
+
+**What are the industry groups of these products?**
 ```
 WITH industry AS (
   	SELECT product_name, SUM(carbon_footprint_pcf), industry_group_id
