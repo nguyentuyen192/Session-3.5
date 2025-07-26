@@ -40,7 +40,7 @@ WITH industry AS (
 | Automobiles & Components           | 
 | Capital Goods                      | 
 
-**What are the industries with the highest contribution to carbon emissions**
+**What are the industries with the highest contribution to carbon emissions?**
 ```
 SELECT 
 	industry_groups.industry_group, 
