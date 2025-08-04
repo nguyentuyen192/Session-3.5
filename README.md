@@ -1,5 +1,22 @@
-# Session-3.5
-**Which products contribute the most to carbon emissions?**
+**1. Introduction**
+
+This report aims to analyze carbon emissions to examine the carbon footprint across various industries. We aim to identify sectors with the highest levels of emissions by analyzing them across countries and years, as well as to uncover trends.
+
+Carbon emissions play a crucial role in the environment, accounting for over 75% of global emissions and posing a significant environmental challenge. These emissions contribute to the accumulation of greenhouse gases in the atmosphere, leading to climate change, planetary warming, and involvement in various environmental disasters.
+
+Through this analysis, we hope to gain an understanding of the environmental impact of different industries and contribute to making informed decisions in sustainable development.
+
+**2. Data Source: Where Our Data Comes From**
+
+Our dataset is compiled from publicly available data from nature.com and encompasses the product carbon footprints (PCF) for various companies. PCFs represent the greenhouse gas emissions associated with specific products, quantified in CO2 (carbon dioxide equivalent).
+
+**3. Data Structure**
+
+The dataset consists of 4 tables containing information regarding carbon emissions generated during the production of goods.
+
+**4. Analysis**
+
+**4.1. Top 10 products contribute the most to carbon emissions**
 ```
 SELECT product_name, SUM(carbon_footprint_pcf)
 FROM product_emissions
@@ -20,7 +37,7 @@ LIMIT 10
 | Audi A6                                                                                                                            | 111282                    | 
 | Average of all GM vehicles produced and used in the 10 year life-cycle.                                                            | 100621                    | 
 
-**What are the industry groups of these products?**
+**4.2. The industry groups of these products**
 ```
 WITH industry AS (
   	SELECT product_name, SUM(carbon_footprint_pcf), industry_group_id
@@ -40,7 +57,7 @@ WITH industry AS (
 | Automobiles & Components           | 
 | Capital Goods                      | 
 
-**What are the industries with the highest contribution to carbon emissions?**
+**4.3. Top 5 industries with the highest contribution to carbon emissions**
 ```
 SELECT 
 	industry_groups.industry_group, 
@@ -59,27 +76,7 @@ LIMIT 5
 | Technology Hardware & Equipment    | 363776    | 
 | Capital Goods                      | 258712    | 
 
-**What are the industry groups of these products?**
-```
-WITH industry AS (
-  	SELECT product_name, SUM(carbon_footprint_pcf), industry_group_id
-	FROM product_emissions
-	GROUP BY product_name
-	ORDER BY SUM(carbon_footprint_pcf) DESC
-	LIMIT 10
-  )
-  SELECT DISTINCT industry_groups.industry_group
-  FROM industry_groups
-  JOIN industry ON industry.industry_group_id = industry_groups.id
-```
-| industry_group                     | 
-| ---------------------------------: | 
-| Electrical Equipment and Machinery | 
-| Materials                          | 
-| Automobiles & Components           | 
-| Capital Goods                      | 
-
-**What are the companies with the highest contribution to carbon emissions?**
+**4.4. Top 5 companies with the highest contribution to carbon emissions**
 ```
 SELECT 
 	companies.company_name, 
@@ -98,7 +95,7 @@ LIMIT 5
 | "Mitsubishi Gas Chemical Company, Inc." | 212016    | 
 | "Hino Motors, Ltd."                     | 191687    | 
 
-**What are the countries with the highest contribution to carbon emissions?**
+**4.5. Top 5 countries with the highest contribution to carbon emissions**
 ```
 SELECT 
 	countries.country_name, 
@@ -117,7 +114,7 @@ LIMIT 5
 | USA          | 518381    | 
 | South Korea  | 186965    | 
 
-**What is the trend of carbon footprints (PCFs) over the years?**
+**4.6. The trend of carbon footprints (PCFs) over the years**
 ```
 SELECT 
 	year,
@@ -133,7 +130,7 @@ GROUP BY year
 | 2016 | 1640182   | 
 | 2017 | 340271    | 
 
-**Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?**
+**4.7. Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?**
 ```
 SELECT 
 	product_emissions.year,
